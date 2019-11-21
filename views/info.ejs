@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Lotto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="로또번호를 생성합니다">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js"></script>
+    <script src="/js/lotto.js"></script>
+</head>
+<style>
+    .container {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+    
+    .generater {
+        margin-top: 30px;
+    }
+    
+    #lottoTitle {
+        margin: 0;
+        margin-left: 18px;
+        padding: 18px 0;
+        text-align: center;
+    }
+    
+    .lottoWrap {
+        height: 300px;
+        text-align: center;
+        overflow-y: scroll;
+    }
+    
+    #generate {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="ui inverted menu">
+        <a href="/" class="item">
+            로또번호생성
+        </a>
+        <a href="/info" class="active item">
+            당첨정보
+        </a>
+    </div>
+    <div class="container generater">
+
+    </div>
+
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var socket = io('localhost:3000/')
+        socket.emit('test')
+    })
+</script>
+
+</html>

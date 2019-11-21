@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Lotto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="로또번호를 생성합니다">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js"></script>
+    <script src="/js/lotto.js"></script>
+</head>
+
+<body>
+    <div class="ui inverted menu">
+        <a href="/" class="active item">
+            로또번호생성
+        </a>
+        <a href="/info" class="item">
+            당첨정보
+        </a>
+    </div>
+    <div class="container generater">
+        <div class="ui segments">
+            <h2 class="lottoTitle">로또 번호</h2>
+            <div class="ui segment lottoWrap">
+            </div>
+        </div>
+        <button id="generate" class="ui large green button">생성</button>
+    </div>
+    <div class="container calcContainer">
+        <div class="ui segments">
+            <h2 class="lottoTitle">당첨금 계산</h2>
+            <div class="ui segment">
+
+            </div>
+        </div>
+    </div>
+    <div class="container infoContainer">
+        <div class="ui segments">
+            <h2 class="lottoTitle">등수 및 배분</h2>
+            <div class="ui segment">
+                <table class="ui celled table">
+                    <colgroup>
+                        <col style="width:105px">
+                        <col style="width:175px">
+                        <col style="width:160px">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">등위</th>
+                            <th scope="col">당첨방법</th>
+                            <th scope="col">확률</th>
+                            <th scope="col">당첨금 배분 비율</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1등</td>
+                            <td>6개 번호 일치</td>
+                            <td>1 / 8,145,060</td>
+                            <td>총 당첨금 중 4등, 5등 금액을 제외한 금액의 75%</td>
+                        </tr>
+                        <tr>
+                            <td>2등</td>
+                            <td>5개 번호 일치<br>+ 보너스 번호일치</td>
+                            <td>1 / 1,357,510</td>
+                            <td>총 당첨금 중 4등, 5등 금액을 제외한 금액의 12.5%</td>
+                        </tr>
+                        <tr>
+                            <td>3등</td>
+                            <td>5개 번호 일치</td>
+                            <td>1 / 35,724</td>
+                            <td>총 당첨금 중 4등, 5등 금액을 제외한 금액의 12.5%</td>
+                        </tr>
+                        <tr>
+                            <td>4등</td>
+                            <td>4개 번호 일치</td>
+                            <td>1 / 733</td>
+                            <td>50,000원</td>
+                        </tr>
+                        <tr>
+                            <td>5등</td>
+                            <td>3개 번호 일치</td>
+                            <td>1 / 45</td>
+                            <td>5,000원</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#generate').click(function() {
+            lottoGenerate()
+        })
+    })
+</script>
+
+</html>
