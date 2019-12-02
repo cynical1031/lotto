@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Lotto</title>
+    <title>로또번호 생성, 실수령 계산기</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -30,14 +30,6 @@
             </div>
         </div>
         <button id="generate" class="ui large green button">생성</button>
-    </div>
-    <div class="container calcContainer">
-        <div class="ui segments">
-            <h2 class="lottoTitle">당첨금 계산</h2>
-            <div class="ui segment">
-
-            </div>
-        </div>
     </div>
     <div class="container infoContainer">
         <div class="ui segments">
@@ -94,12 +86,124 @@
             </div>
         </div>
     </div>
+    <div class="container calcContainer">
+        <div class="ui segments">
+            <h2 class="lottoTitle">실수령 계산기</h2>
+            <div class="ui segment">
+
+                <div id="calcWrap" class="ui form">
+                    <div class="four fields">
+                        <div class="ui center field labeled input">
+                            <div class="ui floating dropdown column labeled icon button">
+                                <i class="filter icon"></i>
+                                <span class="text">회차</span>
+                                <div class="menu">
+                                    <div class="ui icon search input">
+                                        <i class="search icon"></i>
+                                        <input type="text" placeholder="회차 검색">
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="scrolling menu">
+                                        <div class="item">
+                                            직접 입력
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui center field labeled input">
+                            <label for="amount" class="ui label">당첨금</label>
+                            <input type="number" placeholder="당첨금" id="amount">
+                            <label for="amount" class="ui label">&#8361;</label>
+                        </div>
+                        <div class="ui center field labeled input">
+                            <label for="amount" class="ui label">세 금</label>
+                            <input type="text" placeholder="세금" id="tex" value="0" readonly>
+                            <label for="amount" class="ui label">&#8361;</label>
+                        </div>
+                        <div class="ui center field labeled input">
+                            <label for="amount" class="ui label">지급액</label>
+                            <input type="text" placeholder="지급액" id="real" readonly>
+                            <label for="amount" class="ui label">&#8361;</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container infoContainer">
+        <div class="ui segments">
+            <h2 class="lottoTitle">원천징수 세율</h2>
+            <div class="ui segment">
+                <table class="ui celled table">
+                    <colgroup>
+                        <col style="width:50%">
+                        <col style="width:50%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">기타소득금액</th>
+                            <th scope="col">세율</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>5만원 초과 ~ 3억 이하</td>
+                            <td>22% (소득세 20% + 주민세 2%)</td>
+                        </tr>
+                        <tr>
+                            <td>3억 원 초과</td>
+                            <td>33% (소득세 30% + 주민세 3%)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#generate').click(function() {
             lottoGenerate()
         })
+        $('.ui.dropdown')
+            .dropdown();
+        $('#amount').on("change keyup paste", function() {
+            var count = $(this).val()
+            switch (true) {
+                case (count <= 50000):
+                    $('#tex').val(0)
+                    $('#real').val(comma($(this).val()))
+                    break;
+                case ($(this).val() > 50000 && $(this).val() <= 300000000):
+                    $('#tex').val(comma(count * 0.22))
+                    $('#real').val(comma(count * 0.78))
+                    break;
+                case ($(this).val() > 300000000):
+                    var maxTex = ((count - 1000) - 300000000) * 0.33
+                    var tex = 66000000 + maxTex
+                    $('#tex').val(comma(Math.floor(maxTex)))
+                    $('#real').val(comma(Math.round(count - tex)))
+                    break;
+                default:
+                    break;
+            }
+
+        })
+
+        function comma(num) {
+            var len, point, str;
+            num = num + "";
+            point = num.length % 3;
+            len = num.length;
+            str = num.substring(0, point);
+            while (point < len) {
+                if (str != "") str += ",";
+                str += num.substring(point, point + 3);
+                point += 3;
+            }
+            return str;
+        }
     })
 </script>
 

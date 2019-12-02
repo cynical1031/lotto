@@ -45,3 +45,12 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+
+/* semantic */
+
+.ui.form .field .ui.input,
+.ui.form .fields .field .ui.input,
+.ui.form .wide.field .ui.input {
+    width: auto;
+}
