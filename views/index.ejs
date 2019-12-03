@@ -199,7 +199,7 @@
                 case ($(this).val() > 300000000):
                     var maxTex = ((count - 1000) - 300000000) * 0.33
                     var tex = 66000000 + maxTex
-                    $('#tex').val(comma(Math.floor(maxTex)))
+                    $('#tex').val(comma(Math.floor(tex)))
                     $('#real').val(comma(Math.round(count - tex)))
                     break;
                 default:
