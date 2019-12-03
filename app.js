@@ -9,8 +9,8 @@ app.io = require('socket.io')();
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
 var socketRouter = require('./routes/socket')(app.io)
-
-// view engine setup
+var getLottoResult = require('./routes/scheduler/getLottoResultScheduler')
+    // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(logger('dev'));
@@ -27,9 +27,11 @@ app.use('/', socketRouter);
 // var getLottoNum = schedule.scheduleJob('* * * * * 6', function() {
 //     console.log('schedule1');
 // });
-// var redisUpdate = schedule.scheduleJob('*/1 * * * * *', function() {
-//     console.log('schedule2');
-// });
+var redisUpdate = schedule.scheduleJob('*/10 * * * * *', function() {
+    getLottoResult.getHtml().then(result => {
+        console.log(result)
+    })
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
